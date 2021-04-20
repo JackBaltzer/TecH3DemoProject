@@ -30,9 +30,10 @@ namespace TecH3DemoProject.Api.Services
             throw new NotImplementedException();
         }
 
-        public Task<Author> GetAuthorByIdAsync(int id)
+        public async Task<Author> GetAuthorByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            var author = await _authorRepository.GetAuthorByIdAsync(id);
+            return author;
         }
 
         public Task<Author> UpdateAsync(int id, string firstname, string lastname)
