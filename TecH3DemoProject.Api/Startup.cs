@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -11,6 +12,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TecH3DemoProject.Api.Database;
+using TecH3DemoProject.Api.Repositories;
+using TecH3DemoProject.Api.Services;
 
 namespace TecH3DemoProject.Api
 {
@@ -28,6 +32,14 @@ namespace TecH3DemoProject.Api
         {
 
             services.AddControllers();
+
+            services.AddDbContext<TecH3DemoContext>(
+                options => options.UseSqlServer(Configuration.GetConnectionString("MyConnection")));
+
+            services.AddSingleton<IAuthorRepository, AuthorRepository>();
+            services.AddSingleton<IAuthorService, AuthorService>();
+            
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TecH3DemoProject.Api", Version = "v1" });
