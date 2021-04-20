@@ -36,9 +36,11 @@ namespace TecH3DemoProject.Api
             services.AddDbContext<TecH3DemoContext>(
                 options => options.UseSqlServer(Configuration.GetConnectionString("MyConnection")));
 
-            services.AddSingleton<IAuthorRepository, AuthorRepository>();
-            services.AddSingleton<IAuthorService, AuthorService>();
-            
+            //services.AddSingleton<IAuthorRepository, AuthorRepository>();
+            //services.AddSingleton<IAuthorService, AuthorService>();
+            services.AddScoped<IAuthorRepository, AuthorRepository>();
+            services.AddScoped<IAuthorService, AuthorService>();
+
 
             services.AddSwaggerGen(c =>
             {

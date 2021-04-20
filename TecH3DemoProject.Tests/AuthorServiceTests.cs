@@ -24,6 +24,21 @@ namespace TecH3DemoProject.Tests
         }
 
         [Fact]
+        public async Task RandomTests()
+        {
+            // Arrange
+            int a = 10;
+            int b = 2;
+
+            // Act
+            int c = a + b;
+
+            // Assert
+            Assert.Equal(12, c);
+            Assert.Equal(13, c);
+        }
+
+        [Fact]
         public async Task GetByIdAsync_ShouldReturnNothing_WhenAuthorDoesNotExist()
         {
             // Arrange

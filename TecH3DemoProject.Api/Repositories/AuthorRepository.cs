@@ -1,19 +1,31 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TecH3DemoProject.Api.Database;
 using TecH3DemoProject.Api.Domain;
 
 namespace TecH3DemoProject.Api.Repositories
 {
     public class AuthorRepository : IAuthorRepository
     {
-        public Task<Author> CreateAsync(Author author)
+
+        private readonly TecH3DemoContext _context;
+        public AuthorRepository(TecH3DemoContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
         }
 
-        public Task<Author> DeleteAsync(int id)
+
+        public async Task<Author> CreateAsync(Author author)
+        {
+            await _context.Author.AddAsync(author);
+            await _context.SaveChangesAsync();
+            return author;
+        }
+
+        public void DeleteAsync(int id)
         {
             throw new NotImplementedException();
         }
@@ -23,9 +35,10 @@ namespace TecH3DemoProject.Api.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<List<Author>> GetAuthorsAsync()
+        public async Task<List<Author>> GetAuthorsAsync()
         {
-            throw new NotImplementedException();
+            var authors = await _context.Author.ToListAsync();
+            return authors;
         }
 
         public Task<Author> UpdateAsync(Author author)

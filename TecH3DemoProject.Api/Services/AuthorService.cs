@@ -15,12 +15,19 @@ namespace TecH3DemoProject.Api.Services
             _authorRepository = authorRepository;
         }
 
-        public Task<Author> CreateAsync(string firstname, string lastname)
+        public async Task<Author> CreateAsync(string firstname, string lastname)
         {
-            throw new NotImplementedException();
+            var author = new Author
+            {
+                FirstName = firstname,
+                LastName = lastname
+            };
+
+            author = await _authorRepository.CreateAsync(author);
+            return author;
         }
 
-        public Task<Author> DeleteAsync(int id)
+        public Task<bool> DeleteAsync(int id)
         {
             throw new NotImplementedException();
         }
