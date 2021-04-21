@@ -6,7 +6,7 @@ using TecH3DemoProject.Api.Domain;
 
 namespace TecH3DemoProject.Api.Services
 {
-    interface IAuthorService
+    public interface IAuthorService
     {
         Task<List<Author>> GetAllAuthorsAsync();
         Task<Author> GetAuthorByIdAsync(int id);
