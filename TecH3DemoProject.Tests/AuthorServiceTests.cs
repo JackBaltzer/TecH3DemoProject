@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Moq;
 using System.Threading.Tasks;
-
-using Xunit;
-using Moq;
-using TecH3DemoProject.Api.Services;
-using TecH3DemoProject.Api.Repositories;
 using TecH3DemoProject.Api.Domain;
+using TecH3DemoProject.Api.Repositories;
+using TecH3DemoProject.Api.Services;
+using Xunit;
 
 namespace TecH3DemoProject.Tests
 {
@@ -24,7 +19,7 @@ namespace TecH3DemoProject.Tests
         }
 
         [Fact]
-        public async Task RandomTests()
+        public void RandomTests()
         {
             // Arrange
             int a = 10;
@@ -37,6 +32,19 @@ namespace TecH3DemoProject.Tests
             Assert.Equal(12, c);
             Assert.Equal(13, c);
         }
+
+        [Theory]
+        [InlineData(10, 2)]
+        [InlineData(15, 2)]
+        public void RandomMultitests(int a, int b)
+        {
+            // Act
+            int c = a + b;
+
+            // Assert
+            Assert.Equal(12, c);
+        }
+
 
         [Fact]
         public async Task GetByIdAsync_ShouldReturnNothing_WhenAuthorDoesNotExist()
