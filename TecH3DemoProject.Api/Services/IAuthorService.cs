@@ -12,6 +12,6 @@ namespace TecH3DemoProject.Api.Services
         Task<Author> GetAuthorByIdAsync(int id);
         Task<Author> CreateAsync(string firstname, string lastname);
         Task<Author> UpdateAsync(int id, string firstname, string lastname);
-        Task<bool> DeleteAsync(int id);
+        Task<Author> DeleteAsync(int id);
     }
 }

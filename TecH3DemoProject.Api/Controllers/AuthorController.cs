@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using TecH3DemoProject.Api.Domain;
 using TecH3DemoProject.Api.Services;
@@ -26,35 +24,40 @@ namespace TecH3DemoProject.Api.Controllers
         [HttpGet]
         public async Task<IEnumerable<Author>> GetAll()
         {
-            var authors =  await _authorService.GetAllAuthorsAsync();
+            var authors = await _authorService.GetAllAuthorsAsync();
             return authors;
         }
 
         // GET api/<AuthorController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<Author> Get(int id)
         {
-            return "value";
+            var author = await _authorService.GetAuthorByIdAsync(id);
+            return author;
         }
 
         // POST api/<AuthorController>
         [HttpPost]
-        public async Task<Author> CreateAsync(string firstName, string lastName)
+        public async Task<Author> Create(string firstName, string lastName)
         {
-            var author =  await _authorService.CreateAsync(firstName, lastName);
+            var author = await _authorService.CreateAsync(firstName, lastName);
             return author;
         }
 
         // PUT api/<AuthorController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<Author> Update(int id, string firstName, string lastName)
         {
+            var author = await _authorService.UpdateAsync(id, firstName, lastName);
+            return author;
         }
 
         // DELETE api/<AuthorController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<Author> Delete(int id)
         {
+            var author = await _authorService.DeleteAsync(id);
+            return author;
         }
     }
 }

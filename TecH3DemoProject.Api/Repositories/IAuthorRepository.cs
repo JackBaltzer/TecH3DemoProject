@@ -12,7 +12,7 @@ namespace TecH3DemoProject.Api.Repositories
         Task<Author> GetAuthorByIdAsync(int id);
         Task<Author> CreateAsync(Author author);
         Task<Author> UpdateAsync(Author author);
-        void DeleteAsync(int id);
+        Task<Author> DeleteAsync(int id);
         //Task<Author> DeleteAsync(Author author);
     }
 }
