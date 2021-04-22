@@ -18,34 +18,48 @@ namespace TecH3DemoProject.Tests
             _sut = new AuthorService(_authorRepositoryMock.Object);
         }
 
+        //[Fact]
+        //public void RandomTests()
+        //{
+        //    // Arrange
+        //    int a = 10;
+        //    int b = 2;
+
+        //    // Act
+        //    int c = a + b;
+
+        //    // Assert
+        //    Assert.Equal(12, c);
+        //    Assert.Equal(13, c);
+        //}
+
+        //[Theory]
+        //[InlineData(10, 2)]
+        //[InlineData(15, 2)]
+        //public void RandomMultitests(int a, int b)
+        //{
+        //    // Act
+        //    int c = a + b;
+
+        //    // Assert
+        //    Assert.Equal(12, c);
+        //}
+
+
         [Fact]
-        public void RandomTests()
+        public async Task Create_ShouldFailIfNullIsPassed()
         {
             // Arrange
-            int a = 10;
-            int b = 2;
-
+            _authorRepositoryMock
+                .Setup(x => x.CreateAsync(It.IsAny<Author>()))
+                .ReturnsAsync(() => null);
             // Act
-            int c = a + b;
+            var author = await _sut.CreateAsync("", "");
 
             // Assert
-            Assert.Equal(12, c);
-            Assert.Equal(13, c);
+            Assert.Null(author);
         }
-
-        [Theory]
-        [InlineData(10, 2)]
-        [InlineData(15, 2)]
-        public void RandomMultitests(int a, int b)
-        {
-            // Act
-            int c = a + b;
-
-            // Assert
-            Assert.Equal(12, c);
-        }
-
-
+            
         [Fact]
         public async Task GetByIdAsync_ShouldReturnNothing_WhenAuthorDoesNotExist()
         {

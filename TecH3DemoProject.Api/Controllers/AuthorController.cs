@@ -8,7 +8,7 @@ using TecH3DemoProject.Api.Services;
 
 namespace TecH3DemoProject.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/author")]
     [ApiController]
     public class AuthorController : ControllerBase
     {
@@ -20,7 +20,7 @@ namespace TecH3DemoProject.Api.Controllers
             _authorService = authorService;
         }
 
-        // GET: api/<AuthorController>
+        // GET: api/author
         [HttpGet]
         public async Task<IEnumerable<Author>> GetAll()
         {
@@ -28,7 +28,7 @@ namespace TecH3DemoProject.Api.Controllers
             return authors;
         }
 
-        // GET api/<AuthorController>/5
+        // GET api/author/5
         [HttpGet("{id}")]
         public async Task<Author> Get(int id)
         {
@@ -36,7 +36,7 @@ namespace TecH3DemoProject.Api.Controllers
             return author;
         }
 
-        // POST api/<AuthorController>
+        // POST api/author
         [HttpPost]
         public async Task<Author> Create(string firstName, string lastName)
         {
@@ -44,7 +44,7 @@ namespace TecH3DemoProject.Api.Controllers
             return author;
         }
 
-        // PUT api/<AuthorController>/5
+        // PUT api/author/5
         [HttpPut("{id}")]
         public async Task<Author> Update(int id, string firstName, string lastName)
         {
@@ -52,7 +52,7 @@ namespace TecH3DemoProject.Api.Controllers
             return author;
         }
 
-        // DELETE api/<AuthorController>/5
+        // DELETE api/author/5
         [HttpDelete("{id}")]
         public async Task<Author> Delete(int id)
         {
