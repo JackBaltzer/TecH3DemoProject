@@ -51,10 +51,10 @@ namespace TecH3DemoProject.Tests
         {
             // Arrange
             _authorRepositoryMock
-                .Setup(x => x.CreateAsync(It.IsAny<Author>()))
+                .Setup(x => x.Create(It.IsAny<Author>()))
                 .ReturnsAsync(() => null);
             // Act
-            var author = await _sut.CreateAsync("", "");
+            var author = await _sut.CreateAsync(null, null);
 
             // Assert
             Assert.Null(author);
@@ -66,7 +66,7 @@ namespace TecH3DemoProject.Tests
             // Arrange
             // make the MockRepo return null when any Author is requested
             _authorRepositoryMock
-                .Setup(x => x.GetAuthorByIdAsync(It.IsAny<int>()))
+                .Setup(x => x.GetById(It.IsAny<int>()))
                 .ReturnsAsync(() => null);
 
             // Act
@@ -92,7 +92,7 @@ namespace TecH3DemoProject.Tests
                 LastName = authorLastName
             };
             _authorRepositoryMock
-                .Setup(x => x.GetAuthorByIdAsync(authorId))
+                .Setup(x => x.GetById(authorId))
                 .ReturnsAsync(mockAuthor);
 
             // Act

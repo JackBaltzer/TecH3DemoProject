@@ -14,7 +14,10 @@ namespace TecH3DemoProject.Api.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FirstName = table.Column<string>(type: "nvarchar(32)", maxLength: 32, nullable: false),
-                    LastName = table.Column<string>(type: "nvarchar(32)", maxLength: 32, nullable: false)
+                    LastName = table.Column<string>(type: "nvarchar(32)", maxLength: 32, nullable: false),
+                    createdAt = table.Column<DateTime>(type: "datetime", nullable: false),
+                    updatedAt = table.Column<DateTime>(type: "datetime", nullable: true),
+                    deletedAt = table.Column<DateTime>(type: "datetime", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -30,7 +33,10 @@ namespace TecH3DemoProject.Api.Migrations
                     Title = table.Column<string>(type: "nvarchar(32)", maxLength: 32, nullable: false),
                     Pages = table.Column<int>(type: "int", nullable: false),
                     Publised = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    AuthorId = table.Column<int>(type: "int", nullable: false)
+                    AuthorId = table.Column<int>(type: "int", nullable: false),
+                    createdAt = table.Column<DateTime>(type: "datetime", nullable: false),
+                    updatedAt = table.Column<DateTime>(type: "datetime", nullable: true),
+                    deletedAt = table.Column<DateTime>(type: "datetime", nullable: true)
                 },
                 constraints: table =>
                 {

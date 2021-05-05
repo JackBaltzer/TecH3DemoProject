@@ -36,6 +36,15 @@ namespace TecH3DemoProject.Api.Migrations
                         .HasMaxLength(32)
                         .HasColumnType("nvarchar(32)");
 
+                    b.Property<DateTime>("createdAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("deletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("updatedAt")
+                        .HasColumnType("datetime2");
+
                     b.HasKey("Id");
 
                     b.ToTable("Author");
@@ -61,6 +70,15 @@ namespace TecH3DemoProject.Api.Migrations
                         .IsRequired()
                         .HasMaxLength(32)
                         .HasColumnType("nvarchar(32)");
+
+                    b.Property<DateTime>("createdAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("deletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("updatedAt")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 

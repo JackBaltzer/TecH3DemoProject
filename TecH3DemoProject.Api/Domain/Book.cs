@@ -4,10 +4,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TecH3DemoProject.Api.Domain
 {
-    public class Book
+    public class Book : BaseModel
     {
-        [Key]
-        public int Id { get; set; }
+
+        // Id exists in BaseModel
 
         [Required]
         [StringLength(32, ErrorMessage = "Title length can't be more than 32 chars")]
@@ -20,5 +20,6 @@ namespace TecH3DemoProject.Api.Domain
 
         [ForeignKey("Author.Id")]
         public int AuthorId { get; set; }
+
     }
 }

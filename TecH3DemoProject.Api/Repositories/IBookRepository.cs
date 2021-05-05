@@ -8,10 +8,10 @@ namespace TecH3DemoProject.Api.Repositories
 {
     public interface IBookRepository
     {
-        Task<List<Book>> GetAllBooksAsync();
-        Task<Book> GetBookByIdAsync(int id);
-        Task<Book> CreateAsync(Book book);
-        Task<Book> UpdateAsync(Book book);
-        Task<Book> DeleteAsync(int id);
+        Task<List<Book>> GetAllBooks();
+        Task<Book> GetBookById(int id);
+        Task<Book> Create(Book book);
+        Task<Book> Update(Book book);
+        Task<Book> Delete(int id);
     }
 }

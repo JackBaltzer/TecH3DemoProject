@@ -1,9 +1,13 @@
-﻿using System.Collections.Generic;
+﻿
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace TecH3DemoProject.Api.Domain
 {
-    public class Author
+    public class Author:BaseModel
     {
 
         public Author()
@@ -11,8 +15,7 @@ namespace TecH3DemoProject.Api.Domain
             Books = new List<Book>();
         }
 
-        [Key]
-        public int Id { get; set; }
+        // Id exists in BaseModel
 
         [Required]
         [StringLength(32, ErrorMessage = "Firstname length can't be more than 32 chars")]
@@ -22,7 +25,7 @@ namespace TecH3DemoProject.Api.Domain
         [StringLength(32, ErrorMessage = "Lastname length can't be more than 32 chars")]
         public string LastName { get; set; }
 
-
         public List<Book> Books { get; set; }
+
     }
 }

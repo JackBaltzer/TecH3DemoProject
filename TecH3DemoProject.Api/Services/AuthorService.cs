@@ -16,13 +16,14 @@ namespace TecH3DemoProject.Api.Services
 
         public async Task<List<Author>> GetAllAuthorsAsync()
         {
-            var authors = await _authorRepository.GetAuthorsAsync();
+            var authors = await _authorRepository.GetAll();
+            // måske sorteres, eller på anden vis manipuleres inden data returneres
             return authors;
         }
 
         public async Task<Author> GetAuthorByIdAsync(int id)
         {
-            var author = await _authorRepository.GetAuthorByIdAsync(id);
+            var author = await _authorRepository.GetById(id);
             return author;
         }
 
@@ -34,7 +35,7 @@ namespace TecH3DemoProject.Api.Services
                 LastName = lastname
             };
 
-            author = await _authorRepository.CreateAsync(author);
+            author = await _authorRepository.Create(author);
             return author;
         }
 
@@ -46,13 +47,13 @@ namespace TecH3DemoProject.Api.Services
                 FirstName = firstname,
                 LastName = lastname
             };
-            await _authorRepository.UpdateAsync(author);
+            await _authorRepository.Update(author);
             return author;
         }
 
         public async Task<Author> DeleteAsync(int id)
         {
-            var author = await _authorRepository.DeleteAsync(id);
+            var author = await _authorRepository.Delete(id);
             return author;
         }
     }
