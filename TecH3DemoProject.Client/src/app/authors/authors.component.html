@@ -1,0 +1,7 @@
+<p>authors works!</p>
+<ul *ngFor="let author of authors">
+   <li (click)="onSelect(author)" >{{ author.firstName }} {{ author.lastName }}</li>
+</ul>
+
+
+<app-author-detail [author]="author"></app-author-detail>
