@@ -11,7 +11,7 @@ namespace TecH3DemoProject.Api.Repositories
         Task<List<Author>> GetAll();
         Task<Author> GetById(int id);
         Task<Author> Create(Author author);
-        Task<Author> Update(Author author);
+        Task<Author> Update(int id, Author author);
         Task<Author> Delete(int id);
         //Task<Author> DeleteAsync(Author author);
     }

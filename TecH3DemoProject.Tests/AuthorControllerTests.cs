@@ -1,14 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Moq;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
 using System.Threading.Tasks;
 using TecH3DemoProject.Api.Controllers;
 using TecH3DemoProject.Api.Domain;
-using TecH3DemoProject.Api.Repositories;
 using TecH3DemoProject.Api.Services;
 using Xunit;
 
@@ -16,57 +11,139 @@ namespace TecH3DemoProject.Tests
 {
     public class AuthorControllerTests
     {
-        private readonly AuthorController _sut;
-        private readonly  Mock<IAuthorService> authorService = new();
+        private readonly AuthorController _controller;
+        private readonly Mock<IAuthorService> authorService = new();
 
         public AuthorControllerTests()
         {
-            _sut = new AuthorController(authorService.Object);
+            _controller = new AuthorController(authorService.Object);
         }
 
         [Fact]
-        public async Task Create_ShouldReturnStatus400_WhenAuthorSubmitIsMissingFirstname()
+        public async Task GetAll_ShouldReturn200_WhenDataExists()
         {
-            //authorService
-            //    .Setup(s => s.CreateAsync(It.IsAny<string>(), It.IsAny<string>()))
-            //    .Returns();
-            // specifikt se på det ObjectResult der kommer fra controller
-            ObjectResult result = await _sut.Create(new Author { FirstName = "", LastName = "" }) as ObjectResult;
+            // Arrange
+            List<Author> authors = new List<Author>();
+            authors.Add(new Author());
+            authors.Add(new Author());
 
-            Assert.Equal(400,  result.StatusCode);
+            authorService
+                .Setup(s => s.GetAllAuthors())
+                .ReturnsAsync(authors);
+
+            // Act
+            var result = await _controller.GetAll();
+
+            // Assert
+            //specifikt se på det ObjectResult der kommer fra _controller
+            var statusCodeResult = (IStatusCodeActionResult)result;
+            Assert.Equal(200, statusCodeResult.StatusCode);
         }
+
+
+        [Fact]
+        public async Task GetAll_ShouldReturn204_WhenNoDataExists()
+        {
+            // Arrange
+            List<Author> authors = new List<Author>();
+
+            authorService
+                .Setup(s => s.GetAllAuthors())
+                .ReturnsAsync(authors);
+
+            // Act
+            var result = await _controller.GetAll();
+
+            // Assert
+            //specifikt se på det ObjectResult der kommer fra _controller
+            var statusCodeResult = (IStatusCodeActionResult)result;
+            Assert.Equal(204, statusCodeResult.StatusCode);
+        }
+
+
+        [Fact]
+        public async Task GetAll_ShouldReturn500_WhenAuthorsIsNull()
+        {
+            // Arrange
+            List<Author> authors = null;
+
+            authorService
+                .Setup(s => s.GetAllAuthors())
+                .ReturnsAsync(authors);
+
+            // Act
+            var result = await _controller.GetAll();
+
+            // Assert
+            //specifikt se på det ObjectResult der kommer fra _controller
+            var statusCodeResult = (IStatusCodeActionResult)result;
+            Assert.Equal(500, statusCodeResult.StatusCode);
+        }
+
+
+        [Fact]
+        public async Task Create_ShouldReturnStatus400_WhenAuthorSubmittedIsNull()
+        {
+            // Arrange
+            Author author = null;
+
+            authorService
+                .Setup(s => s.Create(null))
+                .ReturnsAsync(author);
+
+            // Act
+            var response = await _controller.Create(author);
+
+            // Assert
+            // specifikt se på det ObjectResult der kommer fra _controller
+            var responseStatusCode = (IStatusCodeActionResult)response;
+            Assert.Equal(400, responseStatusCode.StatusCode);
+        }
+
 
         [Fact]
         public async Task Create_ShouldReturnStatus200_WhenAuthorSubmitIsOk()
         {
-            authorService.Setup(s => s.GetAllAuthorsAsync()).Returns(Task.FromResult(new List<Author>()));
-            // specifikt se på det ObjectResult der kommer fra controller
-            ObjectResult result = await _sut.Create(new Author { FirstName = "Albert", LastName = "Andersen" }) as ObjectResult;
+            // Arrange
+            Author author = new Author { FirstName = "Albert", LastName = "Andersen" };
+            authorService
+                .Setup(s => s.Create(It.IsAny<Author>()))
+                .ReturnsAsync(author);
 
-            Assert.Equal(200, result.StatusCode);
+            // Act
+            var response = await _controller.Create(author);
+
+            // Assert
+            // specifikt se på det ObjectResult der kommer fra _controller
+            var responseStatusCode = (IStatusCodeActionResult)response;
+            Assert.Equal(200, responseStatusCode.StatusCode);
         }
 
+
         [Fact]
-        public async Task ShouldReturnListOfAuthors_WhenAuthorsExists()
+        public async Task GetAuthorById_ShouldReturnAuthor_WhenAuthorExists()
         {
+            // Arrange
+            int id = 1;
+            string firstName = "Albert";
+            string lastName = "Andersen";
 
-            authorService.Setup(s => s.GetAllAuthorsAsync()).Returns(Task.FromResult(new List<Author>()));
+            Author author = new Author
+            {
+                Id = id,
+                FirstName = firstName,
+                LastName = lastName
+            };
 
+            authorService
+                .Setup(s => s.GetAuthorById(It.IsAny<int>()))
+                .ReturnsAsync(author);
 
-            var result = await _sut.GetAll();
+            // Act
+            var response = await _controller.Get(id);
 
-            Assert.NotNull(result);
-        }
-        [Fact]
-        public async Task ShouldReturnAuthor_WhenAuthorExists()
-        {
-
-            authorService.Setup(s => s.GetAuthorByIdAsync(It.IsAny<int>())).Returns(Task.FromResult(new Author()));
-
-
-            var result = await _sut.Get(1);
-
-            Assert.NotNull(result);
+            // Assert
+            Assert.NotNull(response);
         }
     }
 }
