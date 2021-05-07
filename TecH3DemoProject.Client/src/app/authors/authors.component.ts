@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Author, Book } from '../models';
 import { AUTHORS } from '../mock-authors';
+import { AuthorService } from '../author.service';
+import { MessageService } from '../message.service';
+
 
 @Component({
   selector: 'app-authors',
@@ -9,15 +12,22 @@ import { AUTHORS } from '../mock-authors';
 })
 export class AuthorsComponent implements OnInit {
 
-  authors = AUTHORS;
+  authors: Author[] = [];
   author?: Author;
 
-  constructor() { }
+  constructor(private authorService: AuthorService, private messageService: MessageService) { }
 
   ngOnInit(): void {
+    this.getAuthors();
   }
 
-  onSelect(author: Author):void{
+
+  getAuthors(): void {
+    this.authorService.getAuthors().subscribe(authors => this.authors = authors);
+  }
+
+  onSelect(author: Author): void {
+    this.messageService.add(`AuthorComponent: selected author id=${author.id}`);
     this.author = author;
   }
 

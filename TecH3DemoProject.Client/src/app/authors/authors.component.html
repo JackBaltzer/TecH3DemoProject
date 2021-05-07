@@ -1,7 +1,11 @@
-<p>authors works!</p>
-<ul *ngFor="let author of authors">
-   <li (click)="onSelect(author)" >{{ author.firstName }} {{ author.lastName }}</li>
-</ul>
-
+<h1>Forfatter Listen:</h1>
+<div *ngIf="authors.length > 0">
+   <ul *ngFor="let author of authors">
+      <li (click)="onSelect(author)">{{ author.firstName }} {{ author.lastName }}</li>
+   </ul>
+</div>
+<div *ngIf="authors.length == 0">
+   <img src="./assets/spinner.gif">
+</div>
 
 <app-author-detail [author]="author"></app-author-detail>
