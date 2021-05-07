@@ -1,7 +1,15 @@
 <div *ngIf="author">
    <h2>{{author.firstName}} {{author.lastName}}</h2>
-   <p>ret forfatter:</p>
-   <input id="firstname" [(ngModel)]="author.firstName" placeholder="Fornavn">
-   <input id="lastname" [(ngModel)]="author.lastName" placeholder="Efternavn">
-   <button (click)="save()">Save</button>
+   <div class="form">
+      <div>
+         <label for="firstname">Fornavn</label>
+         <input id="firstname" [(ngModel)]="author.firstName" placeholder="Fornavn">
+      </div>
+      <div>
+         <label for="lastname">Efternavn</label>
+         <input id="lastname" [(ngModel)]="author.lastName" placeholder="Efternavn">
+      </div>
+      <button (click)="save()">Gem rettelser</button>
+      <a routerLink="/authors">Annuller</a>
+   </div>
 </div>

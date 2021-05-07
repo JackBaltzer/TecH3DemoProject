@@ -7,42 +7,35 @@ import { Author } from '../models';
 
 
 @Component({
-  selector: 'app-author-detail',
-  templateUrl: './author-detail.component.html',
-  styleUrls: ['./author-detail.component.css']
+   selector: 'app-author-detail',
+   templateUrl: './author-detail.component.html',
+   styleUrls: ['./author-detail.component.css']
 })
 export class AuthorDetailComponent implements OnInit {
+   author: Author;
 
-  @Input() author?: Author;
-  // author: Author;
+   constructor(
+      private route: ActivatedRoute,
+      private authorService: AuthorService,
+      private location: Location
+   ) { }
 
-  constructor(
-    private route: ActivatedRoute,
-    private authorService: AuthorService,
-    private location: Location
-  ) { }
+   ngOnInit(): void {
+      this.getAuthor();
+   }
 
-  ngOnInit(): void {
+   getAuthor(): void {
+      const id = +this.route.snapshot.paramMap.get('id');
+      this.authorService.getAuthor(id)
+         .subscribe(author => this.author = author);
+   }
 
-    if (!this.author) {
+   save(): void {
+      this.authorService.updateAuthor(this.author)
+        .subscribe(() => this.goBack());
+   }
 
-      this.getAuthor(1);
-    }
-  }
-
-  getAuthor(id: number): void {
-    //const id = +this.route.snapshot.paramMap.get('id');
-    this.authorService.getAuthor(id)
-      .subscribe(author => this.author = author);
-  }
-
-  save(): void {
-
-    // this.authorService.updateAuthor(this.author)
-    //   .subscribe(() => this.goBack());
-  }
-
-  goBack(): void {
-    this.location.back();
-  }
+   goBack(): void {
+      this.location.back();
+   }
 }

@@ -1,11 +1,27 @@
-<h1>Forfatter Listen:</h1>
+<h2>Forfatter Listen:</h2>
+<div class="form">
+   <div>
+      <label for="firstName">Fornavn</label>
+      <input id="firstName" #firstName />
+   </div>
+   <div>
+      <label for="lastName">Efternavn</label>
+      <input id="lastName" #lastName />
+   </div>
+   <button (click)="
+         add(firstName.value, lastName.value); 
+         firstName.value = ''; 
+         lastName.value = '';">
+      Tilføj Forfatter
+   </button>
+</div>
+
 <div *ngIf="authors.length > 0">
    <ul *ngFor="let author of authors">
-      <li (click)="onSelect(author)">{{ author.firstName }} {{ author.lastName }}</li>
+      <a routerLink="/author/{{ author.id }}">{{ author.firstName }} {{ author.lastName }}</a>
+      <a (click)="delete(author)">[x]</a>
    </ul>
 </div>
 <div *ngIf="authors.length == 0">
-   <img src="./assets/Infinity-1.3s-200px.svg">
+   <img src="./assets/Infinity-1.3s-200px.svg" />
 </div>
-
-<app-author-detail [author]="author"></app-author-detail>

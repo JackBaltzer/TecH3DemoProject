@@ -25,6 +25,7 @@ namespace TecH3DemoProject.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
+            Console.WriteLine("GetAll authors reached");
             // example to illustrate endpoint being testable for pretty much everything
             try
             {
@@ -53,6 +54,7 @@ namespace TecH3DemoProject.Api.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Get([FromRoute] int id)
         {
+            Console.WriteLine("Fetch single author reached");
             try
             {
                 var author = await _authorService.GetAuthorById(id);
@@ -72,6 +74,7 @@ namespace TecH3DemoProject.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] Author author)
         {
+            Console.WriteLine("Create author reached");
             try
             {
                 if (author == null)
@@ -91,6 +94,7 @@ namespace TecH3DemoProject.Api.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Update([FromRoute] int id, [FromBody] Author author)
         {
+            Console.WriteLine("Update author reached");
             try
             {
                 var editAuthor = await _authorService.Update(id, author);
@@ -110,6 +114,7 @@ namespace TecH3DemoProject.Api.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
+            Console.WriteLine("Delete author reached");
             try
             {
                 var author = await _authorService.Delete(id);
