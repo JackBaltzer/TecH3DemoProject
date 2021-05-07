@@ -1,5 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {Author} from '../models';
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
+
+import { AuthorService } from '../author.service';
+import { Author } from '../models';
 
 
 @Component({
@@ -10,10 +14,35 @@ import {Author} from '../models';
 export class AuthorDetailComponent implements OnInit {
 
   @Input() author?: Author;
+  // author: Author;
 
-  constructor() { }
+  constructor(
+    private route: ActivatedRoute,
+    private authorService: AuthorService,
+    private location: Location
+  ) { }
 
   ngOnInit(): void {
+
+    if (!this.author) {
+
+      this.getAuthor(1);
+    }
   }
 
+  getAuthor(id: number): void {
+    //const id = +this.route.snapshot.paramMap.get('id');
+    this.authorService.getAuthor(id)
+      .subscribe(author => this.author = author);
+  }
+
+  save(): void {
+
+    // this.authorService.updateAuthor(this.author)
+    //   .subscribe(() => this.goBack());
+  }
+
+  goBack(): void {
+    this.location.back();
+  }
 }

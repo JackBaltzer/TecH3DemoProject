@@ -1,0 +1,9 @@
+<p>dashboard works!</p>
+<div *ngIf="authors.length > 0">
+   <ul *ngFor="let author of authors">
+      <li>{{ author.firstName }} {{ author.lastName }}</li>
+   </ul>
+</div>
+<div *ngIf="authors.length == 0">
+   <img src="./assets/Infinity-1.3s-200px.svg">
+</div>

@@ -8,13 +8,15 @@ import { AppComponent } from './app.component';
 import { AuthorsComponent } from './authors/authors.component';
 import { AuthorDetailComponent } from './author-detail/author-detail.component';
 import { MessagesComponent } from './messages/messages.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AuthorsComponent,
     AuthorDetailComponent,
-    MessagesComponent
+    MessagesComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

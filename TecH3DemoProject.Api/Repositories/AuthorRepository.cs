@@ -22,7 +22,9 @@ namespace TecH3DemoProject.Api.Repositories
         {
             return await _context.Author
                 .Where(a => a.deletedAt == null) // filtrer alle "slettede" fra
-                .OrderBy(a => a.createdAt) // især brugbart hvis ID er en Guid
+                //.OrderBy(a => a.createdAt) // især brugbart hvis ID er en Guid
+                .OrderBy(a => a.FirstName)
+                .OrderBy(a => a.LastName)
                 .Include(a => a.Books)
                 .ToListAsync();
         }

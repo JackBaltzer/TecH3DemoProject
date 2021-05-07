@@ -25,7 +25,6 @@ namespace TecH3DemoProject.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            Console.WriteLine("Endpoint 'api/author' was reached");
             // example to illustrate endpoint being testable for pretty much everything
             try
             {
