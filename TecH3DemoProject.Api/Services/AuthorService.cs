@@ -20,13 +20,13 @@ namespace TecH3DemoProject.Api.Services
         public async Task<List<Author>> GetAllAuthors()
         {
             var authors = await _authorRepository.GetAll();
-            // måske sorteres, eller på anden vis manipuleres inden data returneres
             return authors;
         }
 
         public async Task<Author> GetAuthorById(int id)
         {
             var author = await _authorRepository.GetById(id);
+            //author.FirstName = "Derp";
             return author;
         }
 

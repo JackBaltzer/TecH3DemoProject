@@ -1,17 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
 using TecH3DemoProject.Api.Domain;
 using TecH3DemoProject.Api.Services;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace TecH3DemoProject.Api.Controllers
 {
-
     // Controller tager sig af HttpRequests og returnerer data til client...
-    [Route("api/author")]
     [ApiController]
+    [Route("api/author")]
     public class AuthorController : ControllerBase
     {
         private readonly IAuthorService _authorService;
@@ -23,6 +21,9 @@ namespace TecH3DemoProject.Api.Controllers
 
         // GET: api/author
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetAll()
         {
             // example to illustrate endpoint being testable for pretty much everything
@@ -51,6 +52,9 @@ namespace TecH3DemoProject.Api.Controllers
 
         // GET api/author/5
         [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Author))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Get([FromRoute] int id)
         {
             try
@@ -70,6 +74,9 @@ namespace TecH3DemoProject.Api.Controllers
 
         // POST api/author
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Create([FromBody] Author author)
         {
             try
@@ -89,6 +96,9 @@ namespace TecH3DemoProject.Api.Controllers
 
         // PUT api/author/5
         [HttpPut("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Update([FromRoute] int id, [FromBody] Author author)
         {
             try
@@ -108,6 +118,9 @@ namespace TecH3DemoProject.Api.Controllers
 
         // DELETE api/author/5
         [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
             try
