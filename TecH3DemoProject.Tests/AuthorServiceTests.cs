@@ -24,6 +24,7 @@ namespace TecH3DemoProject.Tests
             _authorRepositoryMock
                 .Setup(x => x.Create(It.IsAny<Author>()))
                 .ReturnsAsync(() => null);
+
             // Act
             var author = await _sut.Create(null);
 
