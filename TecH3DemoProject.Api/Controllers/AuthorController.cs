@@ -77,7 +77,7 @@ namespace TecH3DemoProject.Api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Create([FromBody] Author author)
+        public async Task<IActionResult> Create(Author author)
         {
             try
             {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -6,7 +7,7 @@ using System.Text.Json.Serialization;
 
 namespace TecH3DemoProject.Api.Domain
 {
-    public class Author:BaseModel
+    public class Author: BaseModel
     {
 
         public Author()
