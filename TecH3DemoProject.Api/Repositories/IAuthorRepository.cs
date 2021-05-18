@@ -13,6 +13,6 @@ namespace TecH3DemoProject.Api.Repositories
         Task<Author> Create(Author author);
         Task<Author> Update(int id, Author author);
         Task<Author> Delete(int id);
-        //Task<Author> DeleteAsync(Author author);
+        //Task<Author> Delete(Author author);
     }
 }
