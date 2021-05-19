@@ -71,9 +71,8 @@ namespace TecH3DemoProject.Tests
             var author = await _sut.GetAuthorById(authorId);
 
             // Assert
-            Assert.Equal(authorId, author.Id);
-            Assert.Equal(authorFirstName, author.FirstName);
-            Assert.Equal(authorLastName, author.LastName);
+            Assert.Equal(mockAuthor, author);
+            
         }
 
     }
