@@ -8,7 +8,8 @@ using TecH3DemoProject.Api.Domain;
 
 namespace TecH3DemoProject.Api.Repositories
 {
-    // Repository er database arbejds-hesten. Det er kun igennem denne klasse Author data hentes/sendes
+    // Repository er database arbejds-hesten.
+    // Det er kun igennem denne klasse Author data hentes/sendes
     public class AuthorRepository : IAuthorRepository
     {
         private readonly TecH3DemoContext _context;

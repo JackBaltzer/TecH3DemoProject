@@ -18,7 +18,6 @@ namespace TecH3DemoProject.Tests
 
         public AuthorRepositoryTests()
         {
-
             _options = new DbContextOptionsBuilder<TecH3DemoContext>()
                 .UseInMemoryDatabase(databaseName: "AuthorsDataBase")
                 .Options;
