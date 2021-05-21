@@ -9,8 +9,9 @@ using Xunit;
 
 namespace TecH3DemoProject.Tests
 {
-    public class AuthorControllerTests
+    public class AuthorControllerTests 
     {
+
         private readonly AuthorController _controller;
         private readonly Mock<IAuthorService> authorService = new();
 
@@ -35,7 +36,7 @@ namespace TecH3DemoProject.Tests
             var result = await _controller.GetAll();
 
             // Assert
-            //specifikt se på det ObjectResult der kommer fra _controller
+            // specifikt se på det ObjectResult der kommer fra _controller
             var statusCodeResult = (IStatusCodeActionResult)result;
             Assert.Equal(200, statusCodeResult.StatusCode);
         }

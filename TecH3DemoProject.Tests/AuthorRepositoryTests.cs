@@ -12,6 +12,7 @@ namespace TecH3DemoProject.Tests
 
         private DbContextOptions<TecH3DemoContext> _options;
         private readonly TecH3DemoContext _context;
+        private readonly AuthorRepository _authorRepository;
 
         public AuthorRepositoryTests()
         {
@@ -21,8 +22,10 @@ namespace TecH3DemoProject.Tests
 
             _context = new TecH3DemoContext(_options);
 
+            _authorRepository = new AuthorRepository(_context);
 
-            _context.Database.EnsureDeleted();
+            _context.Database.EnsureDeleted(); // makes sure data is fresh and new every time 
+
             _context.Author.Add(new Author
             {
                 Id = 1,
@@ -41,34 +44,34 @@ namespace TecH3DemoProject.Tests
                 FirstName = "Carlo",
                 LastName = "Cool"
             });
-            _context.SaveChanges();
 
+            _context.SaveChanges();
         }
 
         [Fact]
         public async Task GetAuthorById_ShouldReturnAllAuthor_WhenAuthorExists()
         {
             // Arrange
-            AuthorRepository authorRepository = new AuthorRepository(_context);
+            //AuthorRepository authorRepository = new AuthorRepository(_context);
 
             // Act
-            var author = await authorRepository.GetById(1);
+            var author = await _authorRepository.GetById(1);
 
             // Assert
+            Assert.Null(author);
             Assert.Equal(1, author.Id);
             Assert.Equal("Albert", author.FirstName);
             Assert.Equal("Andersen", author.LastName);
-
         }
 
         [Fact]
         public async Task GetAllAuthor_ShouldReturnAllAuthors_WhenAuthorsExists()
         {
             // Arrange
-            AuthorRepository authorRepository = new AuthorRepository(_context);
+            //AuthorRepository authorRepository = new AuthorRepository(_context);
 
             // Act
-            var author = await authorRepository.GetAll();
+            var author = await _authorRepository.GetAll();
 
             // Assert
             Assert.Equal(3, author.Count);
