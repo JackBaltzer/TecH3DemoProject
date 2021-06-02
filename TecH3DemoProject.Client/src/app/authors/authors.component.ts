@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Author, Book } from '../models';
 import { AuthorService } from '../author.service';
 import { MessageService } from '../message.service';
-import { first } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -30,11 +30,13 @@ export class AuthorsComponent implements OnInit {
          .subscribe(authors => this.authors = authors);
    }
 
+   
+
+
    add(firstName: string, lastName: string): void {
       firstName = firstName.trim();
       lastName = lastName.trim();
-
-
+      
       if (!firstName || !lastName) {
          return;
       }
@@ -42,13 +44,17 @@ export class AuthorsComponent implements OnInit {
          .subscribe(author => {
             this.authors.push(author);
          })
+         .unsubscribe();
 
    }
 
    delete(author: Author): void {
       if (confirm('Er du sikker?')) {
-         this.authors = this.authors.filter(a => a !== author);
-         this.authorService.deleteAuthor(author.id).subscribe();
+         this.authorService.deleteAuthor(author.id)
+            .subscribe(author => {
+               this.author = author;
+               this.authors = this.authors.filter(a => a !== author);
+            });
       }
    }
 

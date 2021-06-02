@@ -48,6 +48,22 @@ namespace TecH3DemoProject.Api.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Author");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            FirstName = "Albert",
+                            LastName = "Andersen",
+                            createdAt = new DateTime(2021, 6, 2, 21, 57, 11, 501, DateTimeKind.Local).AddTicks(4485)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            FirstName = "Benjamin",
+                            LastName = "Billiard",
+                            createdAt = new DateTime(2021, 6, 2, 21, 57, 11, 505, DateTimeKind.Local).AddTicks(7412)
+                        });
                 });
 
             modelBuilder.Entity("TecH3DemoProject.Api.Domain.Book", b =>
@@ -85,6 +101,44 @@ namespace TecH3DemoProject.Api.Migrations
                     b.HasIndex("AuthorId");
 
                     b.ToTable("Book");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AuthorId = 1,
+                            Pages = 123,
+                            Publised = new DateTime(2020, 2, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Title = "All The Books",
+                            createdAt = new DateTime(2021, 6, 2, 21, 57, 11, 530, DateTimeKind.Local).AddTicks(9273)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AuthorId = 2,
+                            Pages = 321,
+                            Publised = new DateTime(2021, 12, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Title = "Books are fun",
+                            createdAt = new DateTime(2021, 6, 2, 21, 57, 11, 530, DateTimeKind.Local).AddTicks(9418)
+                        },
+                        new
+                        {
+                            Id = 3,
+                            AuthorId = 1,
+                            Pages = 32,
+                            Publised = new DateTime(2021, 3, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Title = "Alphabet",
+                            createdAt = new DateTime(2021, 6, 2, 21, 57, 11, 530, DateTimeKind.Local).AddTicks(9435)
+                        },
+                        new
+                        {
+                            Id = 4,
+                            AuthorId = 2,
+                            Pages = 91,
+                            Publised = new DateTime(1993, 12, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Title = "Bingo Bullshot",
+                            createdAt = new DateTime(2021, 6, 2, 21, 57, 11, 530, DateTimeKind.Local).AddTicks(9445)
+                        });
                 });
 
             modelBuilder.Entity("TecH3DemoProject.Api.Domain.Book", b =>
